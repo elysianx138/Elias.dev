@@ -1,0 +1,29 @@
+{% capture tocWorkspace %}
+    {% comment %}
+        Version: 1.0.0
+        Generate a table of contents from HTML content.
+    {% endcomment %}
+    {% assign htmlContent = include.html %}
+    {% assign nodes = htmlContent | split: '<h' %}
+    {% assign tocOutput = '' %}
+
+    {% for node in nodes %}
+        {% if node contains '"' %}
+            {% assign level = node | slice: 0, 1 | plus: 0 %}
+            {% if level >= 1 and level <= 6 %}
+                {% assign tagStart = node | split: 'id="' | last %}
+                {% assign idParts = tagStart | split: '"' %}
+                {% assign id = idParts | first %}
+
+                {% assign titleStart = node | split: '>' | last %}
+                {% assign titleEnd = titleStart | split: '</h' | first %}
+                {% assign title = titleEnd | strip_html | strip %}
+
+                {% capture indent %}{% for i in (1..level) %}  {% endfor %}{% endcapture %}
+                {% capture tocItem %}{{ indent }}- [{{ title }}](#{{ id }}){% endcapture %}
+                {% capture tocOutput %}{{ tocOutput }}
+{{ tocItem }}{% endcapture %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endcapture %}{{ tocOutput | markdownify }}

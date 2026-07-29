@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" href="{{ "/" | relative_url }}">
+      {{ site.title | escape }}
+    </a>
+
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger" class="nav-toggle">
+        <span class="menu-icon">☰</span>
+      </label>
+
+      <div class="nav-links">
+        <a href="{{ "/" | relative_url }}">首页</a>
+        <a href="{{ "/about" | relative_url }}">关于</a>
+        <a href="{{ "/archive" | relative_url }}">归档</a>
+        <a href="{{ "/categories" | relative_url }}">分类</a>
+        {%- if site.github_username -%}
+        <a href="https://github.com/{{ site.github_username }}" target="_blank">GitHub</a>
+        {%- endif -%}
+      </div>
+    </nav>
+  </div>
+</header>

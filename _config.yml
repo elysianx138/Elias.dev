@@ -1,0 +1,77 @@
+# ──────────────────────────────────────────────
+#  Site settings
+# ──────────────────────────────────────────────
+title: Elias's Blog
+subtitle: 记录思考，分享技术
+description: >-
+  一个关于编程、技术与生活的个人博客。
+author: elysianx138
+email: elysianx138@example.com
+avatar: /assets/images/avatar.jpg
+
+# ──────────────────────────────────────────────
+#  URL settings
+# ──────────────────────────────────────────────
+# 如果你绑定了自定义域名，把这里改成你的域名
+# 如果没有，保持 username.github.io 的格式
+url: "https://elysianx138.github.io"
+baseurl: "/Elias.dev"      # 如果 repo 名是 username.github.io 则留空
+
+# ──────────────────────────────────────────────
+#  Social links
+# ──────────────────────────────────────────────
+github_username:  elysianx138
+# twitter_username: elias
+# weibo_username:   elias
+rss:               true
+
+# ──────────────────────────────────────────────
+#  Build settings
+# ──────────────────────────────────────────────
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# 如果你想用 GitHub Pages 自带的远程主题
+# remote_theme: jekyll/minima
+# 这里我们使用自定义主题（文件都在仓库里）
+theme: null
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# ──────────────────────────────────────────────
+#  Exclude from build
+# ──────────────────────────────────────────────
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
+
+# ──────────────────────────────────────────────
+#  Defaults
+# ──────────────────────────────────────────────
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: false
+      toc: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# ──────────────────────────────────────────────
+#  Pagination
+# ──────────────────────────────────────────────
+paginate: 10
+paginate_path: "/page:num/"
