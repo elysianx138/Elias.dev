@@ -1,115 +1,105 @@
 # Elias's Blog 🚀
 
-基于 GitHub Pages 和 Jekyll 的个人博客。
+A personal blog built with GitHub Pages and Jekyll.
 
-## 🚀 部署到 GitHub Pages
+## 🚀 Deploy to GitHub Pages
 
-### 准备工作
+### Prerequisites
 
-1. **创建一个 GitHub 仓库**
-   - 如果博客地址是 `https://<你的用户名>.github.io` → 仓库名必须是 `<你的用户名>.github.io`
-   - 如果是项目站点 → 仓库名随意，地址会是 `https://<你的用户名>.github.io/<仓库名>`
+1. **Create a GitHub repository**
+   - For a user site (`https://<username>.github.io`) → the repo must be named `<username>.github.io`
+   - For a project site → any name, URL will be `https://<username>.github.io/<repo>`
 
-2. **配置 `_config.yml`**
-   - 修改 `url` 为你的 GitHub Pages 地址
-   - 如果你用的是项目站点（不是 username.github.io），修改 `baseurl` 为 `/<仓库名>`
-   - 修改 `author`、`email`、`github_username` 为你自己的信息
+2. **Configure `_config.yml`**
+   - Update `url` to your GitHub Pages URL
+   - If using a project site (not username.github.io), set `baseurl` to `/<repo-name>`
+   - Update `author`, `email`, and `github_username`
 
-### 一键部署
+### Quick Deploy
 
 ```bash
-# 1. 初始化 Git 仓库
 git init
-
-# 2. 添加所有文件
 git add .
-
-# 3. 提交
-git commit -m "🎉 初始化博客"
-
-# 4. 关联远程仓库
-git remote add origin https://github.com/<你的用户名>/<你的仓库名>.git
-
-# 5. 推送到 GitHub
+git commit -m "🎉 Initialize blog"
+git remote add origin https://github.com/<username>/<repo>.git
 git push -u origin main
 ```
 
-### 开启 GitHub Pages
+### Enable GitHub Pages
 
-1. 在浏览器打开你的 GitHub 仓库
-2. 进入 **Settings** → **Pages**
-3. 在 "Source" 中选择 **Deploy from a branch**
-4. 选择 `main` 分支，目录选 `/ (root)`
-5. 点击 **Save**
+1. Open your GitHub repository in a browser
+2. Go to **Settings** → **Pages**
+3. Under "Source", select **Deploy from a branch**
+4. Choose `main` branch, directory `/ (root)`
+5. Click **Save**
 
-等待 1-2 分钟，你的博客就会出现在 `https://<你的用户名>.github.io` 上！
+Wait 1-2 minutes, and your blog will be live at `https://<username>.github.io`!
 
-## 🖥️ 本地预览
+## 🖥️ Local Preview
 
-如果你有 Ruby 环境，可以在本地预览：
+If you have Ruby installed:
 
 ```bash
-# 安装依赖
 bundle install
-
-# 启动本地服务器 (访问 http://localhost:4000)
 bundle exec jekyll serve
 ```
 
-## 📝 写博客
+Then visit http://localhost:4000
 
-在 `_posts/` 目录下创建 `.md` 文件，文件名格式必须为：
+## 📝 Writing Posts
+
+Create `.md` files in `_posts/` with the naming format:
 
 ```
-YYYY-MM-DD-文章标题.md
+YYYY-MM-DD-post-title.md
 ```
 
-文件头部格式 (Front Matter)：
+Front Matter:
 
 ```yaml
 ---
-title: "文章标题"
+title: "Post Title"
 date: 2026-07-29 10:00:00 +0800
-categories: [分类1, 分类2]
-tags: [标签1, 标签2]
-author: Elias
+categories: [Category1, Category2]
+tags: [tag1, tag2]
+author: elysianx138
 ---
 ```
 
-## 📁 目录结构
+## 📁 Directory Structure
 
 ```
 .
-├── _config.yml          # 博客配置
-├── _includes/           # 可复用的 HTML 片段
+├── _config.yml          # Site configuration
+├── _includes/           # Reusable HTML components
 │   ├── head.html
 │   ├── header.html
 │   ├── footer.html
 │   └── toc.html
-├── _layouts/            # 页面布局模板
+├── _layouts/            # Page layout templates
 │   ├── default.html
 │   ├── home.html
 │   ├── page.html
 │   └── post.html
-├── _posts/              # 博客文章 (Markdown)
+├── _posts/              # Blog posts (Markdown)
 ├── assets/
-│   ├── css/style.css    # 主样式
-│   └── images/          # 图片资源
-├── about.md             # 关于页面
-├── archive.md           # 归档页面
-├── categories.md        # 分类页面
-├── index.html           # 首页
-├── 404.html             # 404 页面
-└── Gemfile              # Ruby 依赖
+│   ├── css/style.css    # Main stylesheet
+│   └── images/          # Image assets
+├── about.md             # About page
+├── archive.md           # Archive page
+├── categories.md        # Categories page
+├── index.html           # Homepage
+├── 404.html             # 404 page
+└── Gemfile              # Ruby dependencies
 ```
 
-## 🎨 自定义
+## 🎨 Customization
 
-- **样式**: 修改 `assets/css/style.css`
-- **导航栏**: 修改 `_includes/header.html`
-- **页脚**: 修改 `_includes/footer.html`
-- **主题色**: CSS 中以 `#3498db` 为主色调，全局搜索替换即可
+- **Styles**: Edit `assets/css/style.css`
+- **Navigation**: Edit `_includes/header.html`
+- **Footer**: Edit `_includes/footer.html`
+- **Theme color**: Search and replace `#3498db` in the CSS
 
-## 📄 许可
+## 📄 License
 
 MIT

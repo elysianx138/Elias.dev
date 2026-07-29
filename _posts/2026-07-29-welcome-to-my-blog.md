@@ -1,34 +1,34 @@
 ---
-title: "Hello World — 我的新博客开张了！"
+title: "Hello World — My New Blog is Live!"
 date: 2026-07-29 10:00:00 +0800
-categories: [生活, 技术]
+categories: [Life, Tech]
 tags: [blog, hello-world]
-author: Elias
+author: elysianx138
 ---
 
-欢迎来到我的新博客！🎉
+Welcome to my new blog! 🎉
 
-纠结了很久，终于下定决心搭建了自己的个人博客。以前总觉得写博客是一件很正式的事情，要准备充分才能动笔。但现在我明白了——**先做，再慢慢完善**。
+After much deliberation, I've finally set up my personal blog. I used to think blogging was a serious affair that required thorough preparation before writing. But now I realize — **just start, and improve along the way**.
 
-## 为什么选择 GitHub Pages？
+## Why GitHub Pages?
 
-- **免费** — 完全免费托管，没有服务器费用
-- **省心** — 提交代码自动构建，不用管运维
-- **可控** — 所有内容都在 Git 仓库里，版本管理很方便
-- **灵活** — 基于 Jekyll，可以完全自定义
+- **Free** — Completely free hosting, no server costs
+- **Low-maintenance** — Auto-builds on push, no ops work
+- **Controllable** — Everything lives in a Git repository, version control included
+- **Flexible** — Built on Jekyll, fully customizable
 
-## 这里会写什么？
+## What Will I Write About?
 
-这个博客的内容会比较杂，大概包括：
+This blog will cover a mix of topics:
 
-1. **技术笔记** — 编程学习中的收获和踩坑记录
-2. **项目分享** — 自己做的一些小项目
-3. **读书笔记** — 技术书和杂书的读后感
-4. **生活随笔** — 偶尔也会写写生活感悟
+1. **Tech Notes** — Things I learn and pitfalls I encounter while coding
+2. **Project Sharing** — Side projects I build
+3. **Book Reviews** — Thoughts on technical and non-technical books
+4. **Life随笔** — Occasionally, random thoughts about life
 
-## 一段代码示例
+## A Code Snippet
 
-既然是技术博客，怎么能没有代码呢？来一段 Python：
+Since this is a tech blog, here's some Python:
 
 ```python
 def hello(name):
@@ -38,8 +38,8 @@ def hello(name):
 hello("World")
 ```
 
-## 最后
+## Finally
 
-希望这个博客能成为我思考和记录的地方。如果你碰巧看到了这里，欢迎通过 [关于页面](/about/) 找到我。
+I hope this blog becomes a space where I can think and document my journey. If you happen to stumble upon it, feel free to reach out via the [About page](/about/).
 
-**保持好奇，持续学习。** 🚀
+**Stay curious, keep learning.** 🚀

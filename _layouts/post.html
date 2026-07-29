@@ -7,7 +7,7 @@ layout: default
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%Y 年 %m 月 %d 日" }}
+        {{ page.date | date: "%B %d, %Y" }}
       </time>
       {%- if page.author -%}
         &nbsp;•&nbsp;<span itemprop="author">{{ page.author }}</span>
@@ -28,12 +28,12 @@ layout: default
 
   {%- if page.toc -%}
   <nav class="post-toc">
-    <h3>目录</h3>
+    <h3>Table of Contents</h3>
     {% include toc.html html=content %}
   </nav>
   {%- endif -%}
 
-  <!-- 上下篇文章导航 -->
+  <!-- Post navigation -->
   <div class="post-nav">
     {%- if page.previous -%}
       <a class="prev" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>

@@ -1,28 +1,28 @@
 ---
 layout: page
-title: 关于我
+title: About Me
 permalink: /about/
 ---
 
 <img src="/assets/images/avatar.jpg" alt="avatar" class="about-avatar" onerror="this.style.display='none'">
 
-## 👋 你好，我是 Elias
+## 👋 Hi, I'm Elias
 
-一名热爱编程的开发者和技术爱好者。这个博客用来记录我的学习笔记、技术思考和生活中的点滴。
+A passionate developer and tech enthusiast. This blog is where I share my learning notes, technical thoughts, and pieces of life.
 
-## 🔧 技术栈
+## 🔧 Tech Stack
 
-- **语言**: JavaScript, TypeScript, Python, Go
-- **前端**: React, Vue.js, HTML/CSS
-- **后端**: Node.js, Express, Django
-- **数据库**: MySQL, PostgreSQL, MongoDB
-- **工具**: Git, Docker, VS Code
+- **Languages**: JavaScript, TypeScript, Python, Go
+- **Frontend**: React, Vue.js, HTML/CSS
+- **Backend**: Node.js, Express, Django
+- **Database**: MySQL, PostgreSQL, MongoDB
+- **Tools**: Git, Docker, VS Code
 
-## 📫 联系我
+## 📫 Get in Touch
 
-- GitHub: [github.com/elias](https://github.com/elias)
-- Email: [elias@example.com](mailto:elias@example.com)
+- GitHub: [github.com/elysianx138](https://github.com/elysianx138)
+- Email: [elysianx138@gmail.com](mailto:elysianx138@gmail.com)
 
 ---
 
-*博客使用 [GitHub Pages](https://pages.github.com/) + [Jekyll](https://jekyllrb.com/) 搭建。*
+*Built with [GitHub Pages](https://pages.github.com/) + [Jekyll](https://jekyllrb.com/).*
