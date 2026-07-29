@@ -4,7 +4,10 @@ layout: default
 
 <div class="home">
   {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
+    <h1 class="home-heading">
+      {{ site.title }}<br>
+      <em>— {{ site.subtitle }}</em>
+    </h1>
   {%- endif -%}
 
   {{ content }}
@@ -14,9 +17,9 @@ layout: default
       {%- for post in paginator.posts -%}
       <li class="post-item">
         <span class="post-meta">
-          {{ post.date | date: "%Y-%m-%d" }}
+          {{ post.date | date: "%b %d, %Y" }}
           {%- if post.categories -%}
-            &nbsp;•&nbsp;
+            &nbsp;•
             {% for cat in post.categories %}
               <a href="/categories/#{{ cat | slugify }}" class="post-category">{{ cat }}</a>
               {%- unless forloop.last -%}, {% endunless %}
@@ -29,7 +32,9 @@ layout: default
           </a>
         </h2>
         {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
+          <div class="post-excerpt">
+            {{ post.excerpt }}
+          </div>
         {%- endif -%}
       </li>
       {%- endfor -%}
@@ -44,7 +49,5 @@ layout: default
         <a href="{{ paginator.next_page_path | relative_url }}" class="next">Next →</a>
       {%- endif -%}
     </div>
-
-    <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
   {%- endif -%}
 </div>
