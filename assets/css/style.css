@@ -650,6 +650,71 @@ img {
   margin: 40px 0;
 }
 
+/* ══════════════════════════════════════════════
+   Animations & Transitions
+   ══════════════════════════════════════════════ */
+
+/* ─────────── View Transitions API ─────────── */
+@view-transition {
+  navigation: auto;
+}
+
+/* Cross-fade page transition */
+::view-transition-old(root) {
+  animation: vt-fade-out 0.35s ease-out both;
+  pointer-events: none;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in-slide 0.45s ease-out 0.1s both;
+  pointer-events: none;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-12px); }
+}
+
+@keyframes vt-fade-in-slide {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────── Scroll-triggered Reveal Animations ─────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for post list items */
+.post-item.reveal:nth-child(1) { transition-delay: 0.05s; }
+.post-item.reveal:nth-child(2) { transition-delay: 0.1s; }
+.post-item.reveal:nth-child(3) { transition-delay: 0.15s; }
+.post-item.reveal:nth-child(4) { transition-delay: 0.2s; }
+.post-item.reveal:nth-child(5) { transition-delay: 0.25s; }
+.post-item.reveal:nth-child(6) { transition-delay: 0.3s; }
+.post-item.reveal:nth-child(7) { transition-delay: 0.35s; }
+.post-item.reveal:nth-child(8) { transition-delay: 0.4s; }
+.post-item.reveal:nth-child(9) { transition-delay: 0.45s; }
+.post-item.reveal:nth-child(10) { transition-delay: 0.5s; }
+
+/* ─────────── Page Entry Fade-in ─────────── */
+.page-content {
+  animation: page-enter 0.6s ease-out both;
+}
+
+@keyframes page-enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ─────────── Responsive ─────────── */
 @media (max-width: 768px) {
   .site-header .wrapper {
