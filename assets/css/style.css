@@ -125,21 +125,30 @@ img { max-width: 100%; height: auto; }
 .btn--ghost { border-color: var(--line-strong); color: var(--ink); background: transparent; }
 .btn--ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-/* ─────────── Hero — full-screen dark, full-bleed ═────────── */
+/* ─────────── Hero — deep moss, soft blend into paper ─────────── */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex; align-items: center;
-  background: #20251f;
-  background-image: radial-gradient(1200px 500px at 85% -20%, rgba(74,103,65,.55), transparent 60%);
+  background: #263129;
+  background-image:
+    radial-gradient(900px 480px at 82% -10%, rgba(74,103,65,.65), transparent 62%),
+    radial-gradient(700px 420px at 10% 110%, rgba(185,138,62,.16), transparent 60%);
   color: var(--paper);
-  border-bottom: 1px solid #33392f;
   overflow: hidden;
   /* Break out of the .wrapper max-width for a true full-bleed band */
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding-left: max(28px, calc(50vw - var(--max-w) / 2));
   padding-right: max(28px, calc(50vw - var(--max-w) / 2));
+}
+/* Soft gradient that melts the dark band into the cream below */
+.hero::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 90px;
+  background: linear-gradient(180deg, transparent, rgba(247,242,234,1));
+  pointer-events: none;
 }
 .hero__inner { max-width: 720px; }
 .hero__eyebrow { color: #a9c39a; font-size: .85rem; letter-spacing: .3px; margin-bottom: 18px; text-transform: uppercase; }
@@ -391,21 +400,14 @@ img { max-width: 100%; height: auto; }
 /* ─────────── Animations ─────────── */
 @keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
 
-/* Scroll-driven reveal items */
+/* Scroll-driven reveal items (JS controls opacity/transform every frame) */
 .reveal-item {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
   will-change: opacity, transform;
+  opacity: 0;
 }
-.reveal-item.is-visible { opacity: 1; transform: translateY(0); }
-.reveal-item--d1 { transition-delay: .1s; }
-.reveal-item--d2 { transition-delay: .18s; }
-.reveal-item--d3 { transition-delay: .26s; }
-
-/* Reduced-motion: everything visible, no movement */
+/* Reduced-motion: no movement, show everything */
 @media (prefers-reduced-motion: reduce) {
-  .reveal-item { opacity: 1 !important; transform: none !important; transition: none; }
+  .reveal-item { opacity: 1 !important; transform: none !important; }
 }
 
 /* ─────────── Responsive ─────────── */
