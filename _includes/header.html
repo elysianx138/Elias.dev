@@ -1,23 +1,28 @@
 <header class="site-header">
-  <div class="wrapper">
-    <a class="site-logo mono" href="{{ "/" | relative_url }}">
-      <span class="site-logo__prompt">➜</span>
-      <span class="site-logo__name">~/elias</span>
-    </a>
+  <div class="container">
+    <div class="site-header__inner">
+      <a class="site-brand" href="{{ "/" | relative_url }}">
+        <span class="site-brand__mark" aria-hidden="true">E</span>
+        <span class="site-brand__text">
+          <span class="site-brand__name">{{ site.title | escape }}</span>
+          <span class="site-brand__role mono">{{ site.subtitle | escape }}</span>
+        </span>
+      </a>
 
-    <nav class="site-nav" aria-label="Primary">
-      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-      <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">
-        <span class="menu-icon">≡</span>
-      </label>
+      <nav class="site-nav" aria-label="Primary">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">
+          <span class="menu-icon" aria-hidden="true"></span>
+        </label>
 
-      <div class="nav-links">
-        <a href="{{ "/" | relative_url }}" class="nav-link">Home</a>
-        <a href="{{ "/about" | relative_url }}" class="nav-link">About</a>
-        <a href="{{ "/archive" | relative_url }}" class="nav-link">Archive</a>
-        <a href="{{ "/categories" | relative_url }}" class="nav-link">Categories</a>
-        <a href="https://github.com/{{ site.github_username | default: 'elysianx138' }}" target="_blank" rel="noopener" class="nav-link nav-link--ext">GitHub ↗</a>
-      </div>
-    </nav>
+        <ul class="nav-links">
+          <li><a class="site-nav__link js-anchor" href="#blog">Blog</a></li>
+          <li><a class="site-nav__link js-anchor" href="#dev">dev.to</a></li>
+          <li><a class="site-nav__link js-anchor" href="#social">Social</a></li>
+          <li><a class="site-nav__link js-anchor" href="#about">About</a></li>
+          <li><a class="site-nav__link site-nav__link--ext" href="mailto:{{ site.email }}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>

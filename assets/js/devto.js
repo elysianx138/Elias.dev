@@ -1,7 +1,7 @@
 /**
- * Elias Song — dev.to feed sync
- * Fetches the latest articles from DEV Community's public API and renders them
- * into #devto-feed. No build-time plugin needed; stays in sync automatically.
+ * Elias Song — dev.to feed sync (card grid)
+ * Fetches latest articles from DEV Community's public API and renders them as
+ * cards in #devto-feed. Stays in sync automatically, no build-time plugin.
  */
 (function () {
   'use strict';
@@ -9,7 +9,7 @@
   var CONFIG = {
     api: 'https://dev.to/api/articles?username=',
     username: 'elysianx138',
-    max: 5
+    max: 6
   };
 
   function fmtDate(iso) {
@@ -20,91 +20,66 @@
     }
   }
 
-  function escapeHtml(str) {
-    var div = document.createElement('div');
-    div.textContent = str == null ? '' : String(str);
-    return div.innerHTML;
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text) node.textContent = text;
+    return node;
   }
 
   function render(posts) {
-    var target = document.getElementById('devto-feed');
-    if (!target) return;
-
-    target.innerHTML = '';
+    var grid = document.getElementById('devto-feed');
+    if (!grid) return;
+    grid.innerHTML = '';
 
     if (!posts || !posts.length) {
-      target.innerHTML =
-        '<p class="feed-empty">No posts published yet — the feed will light up once ' +
-        '<a href="https://dev.to/' + escapeHtml(CONFIG.username) + '" target="_blank" rel="noopener">' +
-        'dev.to(' + escapeHtml(CONFIG.username) + ')</a> gets its first article.</p>';
+      var empty = el('p', 'empty-note');
+      empty.innerHTML =
+        'No posts released yet — the feed <em>lights up</em> once ' +
+        '<a href="https://dev.to/' + CONFIG.username + '" target="_blank" rel="noopener">dev.to/' + CONFIG.username + '</a> gets its first article.';
+      grid.appendChild(empty);
       return;
     }
 
     var frag = document.createDocumentFragment();
     posts.forEach(function (post) {
-      var el = document.createElement('a');
-      el.className = 'post-item';
-      el.href = post.url;
-      el.target = '_blank';
-      el.rel = 'noopener';
+      var card = el('a', 'card');
+      card.href = post.url;
+      card.target = '_blank';
+      card.rel = 'noopener';
 
-      var meta = document.createElement('div');
-      meta.className = 'post-item__meta mono';
-      meta.innerHTML =
-        '<span>§</span>' +
-        '<span>' + fmtDate(post.published_at) + '</span>' +
-        '<span>·</span>' +
-        '<span>' + (post.reading_time_minutes || 0) + ' min read</span>';
+      var meta = el('div', 'card__meta mono');
+      meta.appendChild(el('time', null, fmtDate(post.published_at)));
+      meta.appendChild(el('span', null, '·'));
+      meta.appendChild(el('span', null, (post.reading_time_minutes || 0) + ' min'));
 
-      var title = document.createElement('h3');
-      title.className = 'post-item__title';
-      title.textContent = post.title;
+      var title = el('h3', 'card__title', post.title);
+      var desc = el('p', 'card__desc', (post.description || '').slice(0, 120) + (post.description && post.description.length > 120 ? '…' : ''));
 
-      var desc = document.createElement('p');
-      desc.className = 'post-item__desc';
-      desc.textContent = (post.description || '').slice(0, 160) + (post.description && post.description.length > 160 ? '…' : '');
-
-      var tags = document.createElement('div');
-      tags.className = 'post-item__tags';
-      (post.tag_list || []).slice(0, 4).forEach(function (tag) {
-        var t = document.createElement('span');
-        t.className = 'post-tag mono';
-        t.textContent = '#' + tag;
-        tags.appendChild(t);
-      });
-
-      if (post.cover_image) {
-        var cover = document.createElement('img');
-        cover.className = 'post-item__cover';
-        cover.src = post.cover_image;
-        cover.alt = '';
-        cover.loading = 'lazy';
-        el.appendChild(cover);
-      }
-
-      el.appendChild(meta);
-      el.appendChild(title);
-      if (desc.textContent) el.appendChild(desc);
-      el.appendChild(tags);
-      frag.appendChild(el);
+      var more = el('span', 'card__more mono', 'Read on dev.to →');
+      card.appendChild(meta);
+      card.appendChild(title);
+      if (desc.textContent) card.appendChild(desc);
+      card.appendChild(more);
+      frag.appendChild(card);
     });
 
-    target.appendChild(frag);
+    grid.appendChild(frag);
   }
 
-  function onError(err) {
-    var target = document.getElementById('devto-feed');
-    if (!target) return;
-    target.innerHTML =
-      '<p class="feed-empty">Couldn\u2019t reach the dev.to feed right now. ' +
-      '<a href="https://dev.to/' + escapeHtml(CONFIG.username) + '" target="_blank" rel="noopener">' +
-      'See the latest posts on dev.to</a>.</p>';
+  function onError() {
+    var grid = document.getElementById('devto-feed');
+    if (!grid) return;
+    grid.innerHTML = '';
+    var note = el('p', 'empty-note');
+    note.innerHTML =
+      '<a href="https://dev.to/' + CONFIG.username + '" target="_blank" rel="noopener">Couldn\u2019t reach the dev.to feed — see latest posts on dev.to</a>.';
+    grid.appendChild(note);
   }
 
   function load() {
-    var target = document.getElementById('devto-feed');
-    if (!target) return;
-
+    var grid = document.getElementById('devto-feed');
+    if (!grid) return;
     fetch(CONFIG.api + CONFIG.username)
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);

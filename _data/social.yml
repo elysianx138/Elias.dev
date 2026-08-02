@@ -30,12 +30,12 @@
 - name: dev.to
   handle: elysianx138
   url: "https://dev.to/elysianx138"
-  icon: devto
+  icon: dev
 
 - name: CoderLegion
   handle: elysianx
   url: "https://coderlegion.com/user/elysianx"
-  icon: coderlegion
+  icon: coder
 
 - name: Email
   handle: elysianx138@gmail.com

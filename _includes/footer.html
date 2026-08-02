@@ -1,16 +1,23 @@
 <footer class="site-footer">
-  <div class="wrapper">
-    <div class="footer-content">
-      <div class="footer-socials">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <span class="site-footer__name">{{ site.title | escape }}</span>
+        <span class="site-footer__tag mono">{{ site.subtitle | escape }}</span>
+      </div>
+      <div class="site-footer__socials">
         {%- for social in site.data.social -%}
-          <a href="{{ social.url }}" target="_blank" rel="noopener" class="footer-social mono"
-             data-icon="{{ social.icon }}" aria-label="{{ social.name | escape }}">
-            {{ social.name | escape }}
+          <a class="footer-icon" href="{{ social.url }}" target="_blank" rel="noopener"
+             aria-label="{{ social.name | escape }}">
+            {% include icons.html icon=social.icon %}
           </a>
         {%- endfor -%}
-        <a href="{{ "/feed.xml" | relative_url }}" class="footer-social mono" aria-label="RSS">RSS</a>
       </div>
-      <p class="footer-note">&copy; {{ site.time | date: "%Y" }} {{ site.author | escape }}. Built with Jekyll · Crafted by hand.</p>
+    </div>
+    <div class="site-footer__bottom">
+      <span>&copy; {{ site.time | date: "%Y" }} {{ site.author | escape }}.</span>
+      <span>Built with Jekyll · Crafted by hand.</span>
+      <a class="mono" href="{{ "/feed.xml" | relative_url }}">RSS</a>
     </div>
   </div>
 </footer>

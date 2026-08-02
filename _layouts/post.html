@@ -4,25 +4,24 @@ layout: default
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta-single mono">
-      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%b %d, %Y" }}
-      </time>
+    <a class="post__back mono" href="{{ "/" | relative_url }}">← blog</a>
+    <h1 class="post__title" itemprop="name headline">{{ page.title | escape }}</h1>
+    <p class="post__meta mono">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%B %d, %Y" }}</time>
       {%- if page.author -%}
-        &nbsp;·&nbsp;<span itemprop="author">{{ page.author }}</span>
+        <span>· {{ page.author | escape }}</span>
       {%- endif -%}
     </p>
     {%- if page.categories -%}
-      <div class="post-tags mono">
-        {% for cat in page.categories %}
-          <a href="/categories/#{{ cat | slugify }}" class="post-category">{{ cat }}</a>
+      <div class="post__tags">
+        {%- for cat in page.categories -%}
+          <a class="card__cat" href="/categories/#{{ cat | slugify }}">{{ cat }}</a>
         {%- endfor -%}
       </div>
     {%- endif -%}
   </header>
 
-  <div class="post-content" itemprop="articleBody">
+  <div class="post__body" itemprop="articleBody">
     {{ content }}
   </div>
 
@@ -33,14 +32,18 @@ layout: default
   </nav>
   {%- endif -%}
 
-  <div class="ornament">✦✦✦</div>
+  <div class="post__end" aria-hidden="true">✦ ✦ ✦</div>
 
-  <div class="post-nav">
+  <nav class="post-nav" aria-label="Post navigation">
     {%- if page.previous -%}
-      <a class="post-nav__link prev" href="{{ page.previous.url | relative_url }}"><span class="mono">← prev</span> {{ page.previous.title }}</a>
+      <a class="post-nav__link prev" href="{{ page.previous.url | relative_url }}">
+        <span class="mono">← prev</span><span class="post-nav__title">{{ page.previous.title }}</span>
+      </a>
     {%- endif -%}
     {%- if page.next -%}
-      <a class="post-nav__link next" href="{{ page.next.url | relative_url }}"><span class="mono">next →</span> {{ page.next.title }}</a>
+      <a class="post-nav__link next" href="{{ page.next.url | relative_url }}">
+        <span class="mono">next →</span><span class="post-nav__title">{{ page.next.title }}</span>
+      </a>
     {%- endif -%}
-  </div>
+  </nav>
 </article>
