@@ -65,6 +65,27 @@
     onScroll();
   }
 
+  /* ─────────── Hero typewriter ─────────── */
+  function initTypewriter() {
+    var el = document.getElementById('typewriter');
+    if (!el) return;
+    var label = (el.getAttribute('aria-label') || 'Elias Song').trim();
+    el.removeAttribute('aria-label');
+    if (reduce()) { el.textContent = label; return; }
+
+    var idx = 0;
+    var delay = Math.max(35, Math.min(90, Math.round(12000 / Math.max(label.length, 1))));
+    function tick() {
+      if (idx < label.length) {
+        idx++;
+        el.textContent = label.slice(0, idx);
+        setTimeout(tick, delay);
+      }
+    }
+    el.textContent = '';
+    setTimeout(tick, 350);
+  }
+
   /* ─────────── Hero parallax: shift + fade as you scroll past ─────────── */
   function initHero() {
     var hero = document.querySelector('.hero');
@@ -107,6 +128,7 @@
   function onReady() {
     init();
     initProgress();
+    initTypewriter();
     initHero();
     initTilt();
   }

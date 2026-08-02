@@ -1,26 +1,22 @@
 <header class="site-header">
-  <div class="container">
+  <div class="wrapper">
     <div class="site-header__inner">
       <a class="site-brand" href="{{ "/" | relative_url }}">
-        <span class="site-brand__mark" aria-hidden="true">E</span>
-        <span class="site-brand__text">
-          <span class="site-brand__name">{{ site.title | escape }}</span>
-          <span class="site-brand__role mono">{{ site.subtitle | escape }}</span>
-        </span>
+        <span class="site-brand__prompt mono" aria-hidden="true">$</span>
+        <span class="site-brand__name mono">{{ site.title | escape }}</span>
+        <span class="site-brand__path mono" aria-hidden="true">&Lowbar;</span>
       </a>
 
       <nav class="site-nav" aria-label="Primary">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">
-          <span class="menu-icon" aria-hidden="true"></span>
-        </label>
+        <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">&#9776;</label>
 
         <ul class="nav-links">
-          <li><a class="site-nav__link js-anchor" href="#intro">About</a></li>
-          <li><a class="site-nav__link js-anchor" href="#stack">Stack</a></li>
-          <li><a class="site-nav__link js-anchor" href="#blog">Writing</a></li>
-          <li><a class="site-nav__link js-anchor" href="#contact">Contact</a></li>
-          <li><a class="site-nav__link site-nav__link--ext" href="mailto:{{ site.email }}">Email</a></li>
+          <li><a class="site-nav__link js-anchor" href="#whoami">whoami</a></li>
+          <li><a class="site-nav__link js-anchor" href="#languages">languages</a></li>
+          <li><a class="site-nav__link js-anchor" href="#blog">writing</a></li>
+          <li><a class="site-nav__link js-anchor" href="#contact">contact</a></li>
+          <li><a class="site-nav__link site-nav__link--ext" href="mailto:{{ site.email }}">email</a></li>
         </ul>
       </nav>
     </div>

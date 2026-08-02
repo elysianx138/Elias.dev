@@ -4,76 +4,73 @@ layout: default
 
 <div class="home">
 
-  <!-- ═══ HERO — full-screen dark ═══ -->
+  <!-- ═══ HERO — typewriter ═══ -->
   <section class="hero">
     <div class="hero__inner">
-      <p class="hero__eyebrow mono">Hello, I'm</p>
-      <h1 class="hero__title">Elias Song</h1>
-      <p class="hero__role mono">{{ site.subtitle | escape }}</p>
+      <p class="hero__prompt mono">$ whoami</p>
+      <h1 class="hero__type" id="typewriter" aria-label="Elias Song"></h1>
+      <p class="hero__role mono">[ C++ / Python / Open Source ]</p>
       <p class="hero__lede">
-        A sophomore building a foundation in <strong>C++</strong> and
-        <strong>Python</strong> — and a certain belief that the best code is
-        written in public.
+        A sophomore who believes the best way to learn is <strong>in public</strong>.
+        I write code, bash it until it works, and leave a trail of notes so the
+        next person finds it easier than I did.
       </p>
       <div class="hero__cta">
-        <a class="btn btn--primary js-anchor" href="#intro">Start reading</a>
-        <a class="btn btn--glass js-anchor" href="#contact">Say hello</a>
+        <a class="btn btn--primary js-anchor" href="#whoami">Begin</a>
+        <a class="btn btn--ghost js-anchor" href="#contact">Say hello</a>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="mono">scroll</span>
+        <span class="hero__scroll-line"></span>
       </div>
     </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <span class="mono">scroll</span>
-      <span class="hero__scroll-line"></span>
-    </div>
   </section>
 
-  <!-- ═══ 01 / Introduction ═══ -->
-  <section class="section" id="intro">
+  <!-- ═══ 01 / whoami ═══ -->
+  <section class="section" id="whoami">
     <div class="section__head reveal-item">
       <span class="section__num mono">01</span>
-      <h2 class="section__title">Why this site exists</h2>
+      <h2 class="section__title">whoami</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>
-    <div class="prose">
-      <p class="lede reveal-item reveal-item--d2">
-        Most of what I learn disappears the moment the next project begins.
-        This site is the antidote — a public notebook, a home on the web, and a
-        slow record of getting better.
-      </p>
-      <p class="reveal-item reveal-item--d3">
-        I'm a second-year student. I picked up <strong>C++</strong> for the
-        discipline and <strong>Python</strong> for the speed of ideas. Open
-        source taught me that you learn fastest in the open — by sharing,
-        breaking, and letting others read your work.
-      </p>
+    <div class="term reveal-item">
+      <div class="term__bar">
+        <span class="term__dot term__dot--r"></span>
+        <span class="term__dot term__dot--y"></span>
+        <span class="term__dot term__dot--g"></span>
+      </div>
+      <div class="term__line"><span class="c">$</span> cat introduction.md</div>
+      <div class="term__line">--</div>
+      <div class="term__line"><span class="k">name:</span> <span class="v">Elias Song</span></div>
+      <div class="term__line"><span class="k">status:</span> <span class="v">second-year student</span></div>
+      <div class="term__line"><span class="k">stack:</span> <span class="v">C++, Python</span></div>
+      <div class="term__line"><span class="k">belief:</span> <span class="v">code is best written in public</span></div>
+      <div class="term__line"><span class="k">hobbies:</span> <span class="v">open source, reading, breaking things gently</span></div>
+      <div class="term__line">--</div>
+      <div class="term__line"><span class="c">$</span> <span class="term-cursor"></span></div>
     </div>
   </section>
 
-  <!-- ═══ 02 / What I work with ═══ -->
-  <section class="section" id="stack">
+  <!-- ═══ 02 / languages ═══ -->
+  <section class="section" id="languages">
     <div class="section__head reveal-item">
       <span class="section__num mono">02</span>
-      <h2 class="section__title">What I build with</h2>
+      <h2 class="section__title">languages</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>
     <div class="stack-cols">
       <div class="stack-col reveal-item">
         <h3 class="mono">C++</h3>
-        <p>Performance, pointers, and the joy of thinking about memory.</p>
+        <p>Performance, pointers, and thinking hard about memory.</p>
       </div>
       <div class="stack-col reveal-item reveal-item--d1">
         <h3 class="mono">Python</h3>
-        <p>Scripting, automation, and turning half-formed ideas into something that runs.</p>
+        <p>The fastest path from a half-formed idea to something that runs.</p>
       </div>
       <div class="stack-col reveal-item reveal-item--d2">
         <h3 class="mono">Open Source</h3>
-        <p>Reading other people's code, contributing where I can, and growing in public.</p>
+        <p>Learning by reading others' code and contributing small wins.</p>
       </div>
-    </div>
-    <div class="about__tags reveal-item">
-      <span class="tag">C++</span>
-      <span class="tag">Python</span>
-      <span class="tag">Open Source</span>
-      <span class="tag">Still Learning</span>
     </div>
   </section>
 
@@ -81,7 +78,7 @@ layout: default
   <section class="section" id="blog">
     <div class="section__head reveal-item">
       <span class="section__num mono">03</span>
-      <h2 class="section__title">Writing</h2>
+      <h2 class="section__title">writing</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>
     {%- if site.posts.size > 0 -%}
@@ -96,9 +93,9 @@ layout: default
           </div>
           <h3 class="card__title">{{ post.title | escape }}</h3>
           {%- if post.excerpt -%}
-            <p class="card__desc">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+            <p class="card__desc">{{ post.excerpt | strip_html | truncate: 110 }}</p>
           {%- endif -%}
-          <span class="card__more mono">Read →</span>
+          <span class="card__more mono">read →</span>
         </a>
         {%- endfor -%}
       </div>
@@ -115,28 +112,27 @@ layout: default
       <span class="section__rule" aria-hidden="true"></span>
     </div>
     <p class="section__note reveal-item">
-      Articles published on
-      <a href="https://dev.to/{{ site.devto_username }}" target="_blank" rel="noopener">dev.to</a> —
+      Published on <a href="https://dev.to/{{ site.devto_username }}" target="_blank" rel="noopener">dev.to</a>,
       synced automatically. CoderLegion mirror:
       <a href="{{ site.coderlegion_url }}" target="_blank" rel="noopener">profile</a>.
     </p>
     <div id="devto-feed" class="card-grid">
-      <div class="card card--skeleton">Loading posts…</div>
+      <div class="card card--skeleton">loading posts…</div>
     </div>
   </section>
 
-  <!-- ═══ 05 / Contact ═══ -->
+  <!-- ═══ 05 / contact ═══ -->
   <section class="section" id="contact">
     <div class="section__head reveal-item">
       <span class="section__num mono">05</span>
-      <h2 class="section__title">Say hello</h2>
+      <h2 class="section__title">say hello</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>
     <div class="contact-cols">
       <div class="contact-intro reveal-item">
         <p>
-          I'm always open to a conversation about code, open source, or a
-          project worth building. The inbox is the best place to reach me.
+          Open to conversations about code, open source, or a project worth
+          building. Best reached by mail — or anywhere on the grid.
         </p>
         <a class="btn btn--primary" href="mailto:{{ site.email }}">email me</a>
       </div>
