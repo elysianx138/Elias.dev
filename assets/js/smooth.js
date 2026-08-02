@@ -1,7 +1,8 @@
 /**
- * Elias Song — GSAP smooth motion
- * Long-form narrative scroll effects: hero stagger entrance, scroll-linked
- * reveals, section-number line drawing, scroll progress bar, card tilt.
+ * Elias Song — GSAP scroll-driven motion
+ * True scroll-linked silk: pinned full-viewport sections whose content animates
+ * in/out as you scroll (scrub), then unpins into the next section. Hero
+ * staggered entrance + parallax, card reveals, progress bar, 3D tilt.
  */
 (function () {
   'use strict';
@@ -9,90 +10,107 @@
   var gsap = window.gsap;
   var ScrollTrigger = window.ScrollTrigger;
 
-  // Only run if GSAP loaded and motion is allowed
-  function motionAllowed() {
-    return window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }
+  var reduceMotion = function () {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  };
+
+  function isMobile() { return window.innerWidth < 768; }
 
   function boot() {
-    if (!motionAllowed()) { document.body.classList.add('no-motion'); return; }
     if (!gsap || !ScrollTrigger) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
-    /* ── Hero staggered entrance ── */
-    var heroEls = document.querySelectorAll('.hero [data-anim]');
-    if (heroEls.length && window.innerWidth > 640) {
-      gsap.from(heroEls, {
-        y: 40, opacity: 0, duration: 1,
-        ease: 'expo.out', stagger: 0.12, delay: 0.15,
-        clearProps: 'transform'
-      });
-    }
+    /* Protect restore: if reduced motion, reveal everything, skip anims */
+    if (reduceMotion()) { document.body.classList.add('no-motion'); return; }
 
     /* ── Scroll progress bar ── */
     var bar = document.querySelector('.scroll-progress');
-    if (bar) {
-      gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { scrub: 0.3, start: 0, end: 'max' } });
+    if (bar) gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { scrub: 0.3, start: 0, end: 'max' } });
+
+    /* ═══ PINNED SCROLL-DRIVEN SECTIONS ═══ */
+    function pinPanel(section) {
+      var inner = section.querySelector('.pin__inner');
+      if (!inner) return;
+
+      var children = Array.prototype.slice.call(inner.children);
+      // Stagger children upward as you scroll through the pinned viewport
+      var tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: '+=120%',
+          scrub: 0.6,
+          pin: true,
+          anticipatePin: 1
+        }
+      });
+
+      tl.from(inner, { opacity: 0, yPercent: 12, ease: 'none', duration: 0.5 });
+      tl.from(children, {
+        y: 60, opacity: 0, stagger: 0.12, ease: 'power1.out', duration: 0.6,
+        delay: 0.3
+      }, '-=0.1');
+      // slide the whole panel up slightly while pinned for parallax feel
+      tl.to(inner, { yPercent: -14, ease: 'none', duration: 0.4 }, '+=0.1');
     }
 
-    /* ── Section heads: line draw + fade ── */
-    document.querySelectorAll('.section__head').forEach(function (head) {
-      var rule = head.querySelector('.section__rule');
-      var title = head.querySelector('.section__title');
-      var num = head.querySelector('.section__num');
-      var tl = gsap.timeline({ scrollTrigger: { trigger: head, start: 'top 85%', once: true } });
-      tl.from(title, { y: 26, opacity: 0, duration: 0.7, ease: 'power3.out' });
-      if (num) tl.from(num, { x: -12, opacity: 0, duration: 0.5, ease: 'power2.out' }, '<');
-      if (rule) tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power2.inOut' }, '-=0.5');
-    });
+    var pinSections = document.querySelectorAll('.pin');
+    if (!isMobile()) {
+      pinSections.forEach(pinPanel);
+    }
 
-    /* ── Card grids: scroll-linked scrub reveal ── */
-    document.querySelectorAll('.card-grid').forEach(function (grid) {
-      var cards = grid.querySelectorAll('.card');
-      if (!cards.length) return;
-      gsap.from(cards, {
-        y: 60, opacity: 0, duration: 1, ease: 'power3.out',
-        stagger: 0.12,
-        scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
+    /* ── Hero: staggered entrance on load (desktop) ── */
+    if (!isMobile()) {
+      var heroEls = document.querySelectorAll('.hero [data-anim]');
+      if (heroEls.length) {
+        gsap.from(heroEls, {
+          y: 44, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.12, delay: 0.2,
+          clearProps: 'transform,opacity'
+        });
+      }
+    }
+
+    /* ── Hero parallax on scroll ── */
+    var heroInner = document.querySelector('.hero .hero__inner');
+    if (heroInner) {
+      gsap.to(heroInner, {
+        opacity: 0, yPercent: -30, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 30%', scrub: 0.5 }
+      });
+    }
+
+    /* ── Normal sections: scroll-linked reveal (not pinned) ── */
+    document.querySelectorAll('.section.normal').forEach(function (sec) {
+      gsap.from(sec.querySelectorAll('.section__head'), {
+        y: 34, opacity: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: sec, start: 'top 80%', once: true }
+      });
+      gsap.from(sec.querySelectorAll('.card'), {
+        y: 60, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.1,
+        scrollTrigger: { trigger: sec, start: 'top 80%', once: true }
       });
     });
 
-    /* ── Social cards ── */
+    /* ── Social cards in pinned contact (fallback if not pinned) ── */
     document.querySelectorAll('.social-grid').forEach(function (grid) {
+      if (isMobile() || grid.closest('.pin')) return; // pinned ones animated by pinPanel
       gsap.from(grid.children, {
-        y: 40, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.07,
+        y: 40, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.06,
         scrollTrigger: { trigger: grid, start: 'top 88%', once: true }
       });
     });
 
-    /* ── Hero parallax (inner floats at different speed) ── */
-    document.querySelectorAll('.hero[data-parallax] .hero__inner').forEach(function (inner) {
-      gsap.to(inner, {
-        yPercent: -16, ease: 'none',
-        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.6 }
-      });
-    });
-
-    /* ── About block ── */
-    document.querySelectorAll('.about').forEach(function (block) {
-      gsap.from(block.children, {
-        y: 34, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1,
-        scrollTrigger: { trigger: block, start: 'top 88%', once: true }
-      });
-    });
-
-    /* ── Card 3D tilt ── */
-    if (window.matchMedia('(hover: hover)').matches && window.innerWidth > 768) {
+    /* ── Card 3D tilt (desktop) ── */
+    if (window.matchMedia('(hover:hover)').matches && !isMobile()) {
       document.querySelectorAll('.card, .social-card').forEach(function (card) {
         card.addEventListener('pointermove', function (e) {
           var r = card.getBoundingClientRect();
           var px = (e.clientX - r.left) / r.width - 0.5;
           var py = (e.clientY - r.top) / r.height - 0.5;
-          gsap.to(card, { rotateY: px * 6, rotateX: -py * 6, transformPerspective: 600, duration: 0.4, ease: 'power2.out' });
+          gsap.to(card, { rotateY: px * 7, rotateX: -py * 7, transformPerspective: 600, duration: 0.4, ease: 'power2.out' });
         });
         card.addEventListener('pointerleave', function () {
-          gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+          gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.5, ease: 'elastic.out(1,0.5)' });
         });
       });
     }
@@ -102,7 +120,7 @@
 
   function whenReady() {
     if (window.gsap && window.ScrollTrigger) { boot(); return; }
-    setTimeout(whenReady, 120); // wait for deferred CDN
+    setTimeout(whenReady, 120);
   }
 
   if (document.readyState === 'loading') {

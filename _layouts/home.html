@@ -4,8 +4,8 @@ layout: default
 
 <div class="home">
 
-  <!-- ═══ HERO — dark focal band ═══ -->
-  <section class="hero" data-parallax>
+  <!-- ═══ HERO — full-screen dark ═══ -->
+  <section class="hero" id="hero-pin">
     <div class="hero__inner">
       <p class="hero__eyebrow mono" data-anim>Hello, I'm</p>
       <h1 class="hero__title" data-anim>Elias Song</h1>
@@ -16,65 +16,73 @@ layout: default
         written in public.
       </p>
       <div class="hero__cta" data-anim>
-        <a class="btn btn--primary js-anchor" href="#blog">Read the blog</a>
+        <a class="btn btn--primary js-anchor" href="#intro">Start reading</a>
         <a class="btn btn--glass js-anchor" href="#contact">Say hello</a>
       </div>
     </div>
-  </section>
-
-  <!-- ═══ 01 / Introduction ═══ -->
-  <section class="section" id="intro">
-    <div class="section__head">
-      <span class="section__num mono">01</span>
-      <h2 class="section__title">Why this site exists</h2>
-      <span class="section__rule" aria-hidden="true"></span>
-    </div>
-    <div class="prose">
-      <p class="lede">
-        Most of what I learn disappears the moment the next project begins.
-        This site is the antidote — a public notebook, a home on the web, and a
-        slow record of getting better.
-      </p>
-      <p>
-        I'm a second-year student. I picked up <strong>C++</strong> for the
-        discipline and <strong>Python</strong> for the speed of ideas. Open
-        source taught me that you learn fastest in the open — by sharing,
-        breaking, and letting others read your work.
-      </p>
+    <div class="hero__scroll" aria-hidden="true">
+      <span class="mono">scroll</span>
+      <span class="hero__scroll-line"></span>
     </div>
   </section>
 
-  <!-- ═══ 02 / What I work with ═══ -->
-  <section class="section" id="stack">
-    <div class="section__head">
-      <span class="section__num mono">02</span>
-      <h2 class="section__title">What I build with</h2>
-      <span class="section__rule" aria-hidden="true"></span>
-    </div>
-    <div class="about__tags">
-      <span class="tag">C++</span>
-      <span class="tag">Python</span>
-      <span class="tag">Open Source</span>
-      <span class="tag">Still Learning</span>
-    </div>
-    <div class="stack-cols">
-      <div class="stack-col">
-        <h3 class="mono">C++</h3>
-        <p>Performance, pointers, and the joy of thinking about memory.</p>
+  <!-- ═══ 01 / Introduction — pinned scroll reveal ═══ -->
+  <section class="pin" id="intro">
+    <div class="pin__inner">
+      <div class="section__head">
+        <span class="section__num mono">01</span>
+        <h2 class="section__title">Why this site exists</h2>
+        <span class="section__rule" aria-hidden="true"></span>
       </div>
-      <div class="stack-col">
-        <h3 class="mono">Python</h3>
-        <p>Scripting, automation, and turning half-formed ideas into something that runs.</p>
-      </div>
-      <div class="stack-col">
-        <h3 class="mono">Open Source</h3>
-        <p>Reading other people's code, contributing where I can, and growing in public.</p>
+      <div class="prose">
+        <p class="lede">
+          Most of what I learn disappears the moment the next project begins.
+          This site is the antidote — a public notebook, a home on the web, and a
+          slow record of getting better.
+        </p>
+        <p>
+          I'm a second-year student. I picked up <strong>C++</strong> for the
+          discipline and <strong>Python</strong> for the speed of ideas. Open
+          source taught me that you learn fastest in the open — by sharing,
+          breaking, and letting others read your work.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ═══ 03 / Local Blog ═══ -->
-  <section class="section" id="blog">
+  <!-- ═══ 02 — What I work with — pinned ═══ -->
+  <section class="pin" id="stack">
+    <div class="pin__inner">
+      <div class="section__head">
+        <span class="section__num mono">02</span>
+        <h2 class="section__title">What I build with</h2>
+        <span class="section__rule" aria-hidden="true"></span>
+      </div>
+      <div class="stack-cols">
+        <div class="stack-col">
+          <h3 class="mono">C++</h3>
+          <p>Performance, pointers, and the joy of thinking about memory.</p>
+        </div>
+        <div class="stack-col">
+          <h3 class="mono">Python</h3>
+          <p>Scripting, automation, and turning half-formed ideas into something that runs.</p>
+        </div>
+        <div class="stack-col">
+          <h3 class="mono">Open Source</h3>
+          <p>Reading other people's code, contributing where I can, and growing in public.</p>
+        </div>
+      </div>
+      <div class="about__tags">
+        <span class="tag">C++</span>
+        <span class="tag">Python</span>
+        <span class="tag">Open Source</span>
+        <span class="tag">Still Learning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 — Blog (not pinned; normal scroll) ═══ -->
+  <section class="section normal" id="blog">
     <div class="section__head">
       <span class="section__num mono">03</span>
       <h2 class="section__title">Writing</h2>
@@ -103,8 +111,8 @@ layout: default
     {%- endif -%}
   </section>
 
-  <!-- ═══ 04 / dev.to ═══ -->
-  <section class="section" id="dev">
+  <!-- ═══ 04 — dev.to — normal ═══ -->
+  <section class="section normal" id="dev">
     <div class="section__head">
       <span class="section__num mono">04</span>
       <h2 class="section__title">dev.to</h2>
@@ -121,32 +129,34 @@ layout: default
     </div>
   </section>
 
-  <!-- ═══ 05 / Contact ═══ -->
-  <section class="section" id="contact">
-    <div class="section__head">
-      <span class="section__num mono">05</span>
-      <h2 class="section__title">Say hello</h2>
-      <span class="section__rule" aria-hidden="true"></span>
-    </div>
-    <div class="contact-cols">
-      <div class="contact-intro">
-        <p>
-          I'm always open to a conversation about code, open source, or a
-          project worth building. The inbox is the best place to reach me.
-        </p>
-        <a class="btn btn--primary" href="mailto:{{ site.email }}">email me</a>
+  <!-- ═══ 05 — Contact — pinned ═══ -->
+  <section class="pin" id="contact">
+    <div class="pin__inner">
+      <div class="section__head">
+        <span class="section__num mono">05</span>
+        <h2 class="section__title">Say hello</h2>
+        <span class="section__rule" aria-hidden="true"></span>
       </div>
-      <div class="social-grid">
-        {%- for social in site.data.social -%}
-        <a class="social-card" href="{{ social.url }}" target="_blank" rel="noopener">
-          <span class="social-card__icon">{% include icons.html icon=social.icon %}</span>
-          <span class="social-card__body">
-            <span class="social-card__name">{{ social.name | escape }}</span>
-            <span class="social-card__handle mono">{{ social.handle | escape }}</span>
-          </span>
-          <span class="social-card__arrow" aria-hidden="true">→</span>
-        </a>
-        {%- endfor -%}
+      <div class="contact-cols">
+        <div class="contact-intro">
+          <p>
+            I'm always open to a conversation about code, open source, or a
+            project worth building. The inbox is the best place to reach me.
+          </p>
+          <a class="btn btn--primary" href="mailto:{{ site.email }}">email me</a>
+        </div>
+        <div class="social-grid">
+          {%- for social in site.data.social -%}
+          <a class="social-card" href="{{ social.url }}" target="_blank" rel="noopener">
+            <span class="social-card__icon">{% include icons.html icon=social.icon %}</span>
+            <span class="social-card__body">
+              <span class="social-card__name">{{ social.name | escape }}</span>
+              <span class="social-card__handle mono">{{ social.handle | escape }}</span>
+            </span>
+            <span class="social-card__arrow" aria-hidden="true">→</span>
+          </a>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </section>
