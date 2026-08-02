@@ -12,11 +12,16 @@
         <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">&#9776;</label>
 
         <ul class="nav-links">
-          <li><a class="site-nav__link js-anchor" href="#whoami">whoami</a></li>
-          <li><a class="site-nav__link js-anchor" href="#languages">languages</a></li>
-          <li><a class="site-nav__link js-anchor" href="#blog">writing</a></li>
-          <li><a class="site-nav__link js-anchor" href="#contact">contact</a></li>
-          <li><a class="site-nav__link site-nav__link--ext" href="mailto:{{ site.email }}">email</a></li>
+          <li><a class="site-nav__link js-anchor" href="#whoami">About</a></li>
+          <li><a class="site-nav__link js-anchor" href="#languages">Stack</a></li>
+          <li><a class="site-nav__link js-anchor" href="#blog">Writing</a></li>
+          <li><a class="site-nav__link js-anchor" href="#contact">Contact</a></li>
+          <li><a class="site-nav__link site-nav__link--ext" href="mailto:{{ site.email }}">Email</a></li>
+          {%- for social in site.data.social -%}
+            {%- if social.icon == 'github' -%}
+          <li><a class="site-nav__link site-nav__link--ext" href="{{ social.url }}" target="_blank" rel="noopener">GitHub</a></li>
+            {%- endif -%}
+          {%- endfor -%}
         </ul>
       </nav>
     </div>

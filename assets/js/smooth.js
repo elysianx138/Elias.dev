@@ -65,25 +65,48 @@
     onScroll();
   }
 
-  /* ─────────── Hero typewriter ─────────── */
+  /* ─────────── Hero rotating typewriter ─────────── */
   function initTypewriter() {
     var el = document.getElementById('typewriter');
     if (!el) return;
-    var label = (el.getAttribute('aria-label') || 'Elias Song').trim();
-    el.removeAttribute('aria-label');
-    if (reduce()) { el.textContent = label; return; }
+    var phrases = [
+      '[ C++ / Python / Open Source ]',
+      '> who writes code in public',
+      '> who learns by breaking things gently',
+      '> who turns half-formed ideas into running code',
+      '> sophomore, developer, tinkerer'
+    ];
+    if (reduce()) {
+      el.textContent = phrases[0];
+      return;
+    }
 
-    var idx = 0;
-    var delay = Math.max(35, Math.min(90, Math.round(12000 / Math.max(label.length, 1))));
+    var pi = 0, ci = 0, deleting = false;
     function tick() {
-      if (idx < label.length) {
-        idx++;
-        el.textContent = label.slice(0, idx);
-        setTimeout(tick, delay);
+      var phrase = phrases[pi];
+      if (!deleting) {
+        ci++;
+        el.textContent = phrase.slice(0, ci);
+        if (ci >= phrase.length) {
+          deleting = true;
+          setTimeout(tick, 1800);   // pause at full phrase
+          return;
+        }
+        setTimeout(tick, 55);
+      } else {
+        ci--;
+        el.textContent = phrase.slice(0, ci);
+        if (ci <= 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(tick, 450);   // pause before next phrase
+          return;
+        }
+        setTimeout(tick, 26);
       }
     }
     el.textContent = '';
-    setTimeout(tick, 350);
+    setTimeout(tick, 600);
   }
 
   /* ─────────── Hero parallax: shift + fade as you scroll past ─────────── */
