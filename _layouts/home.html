@@ -105,10 +105,37 @@ layout: default
     {%- endif -%}
   </section>
 
-  <!-- ═══ 04 / dev.to ═══ -->
-  <section class="section" id="dev">
+  <!-- ═══ 04 / projects ═══ -->
+  <section class="section" id="projects">
     <div class="section__head reveal-item">
       <span class="section__num mono">04</span>
+      <h2 class="section__title">projects</h2>
+      <span class="section__rule" aria-hidden="true"></span>
+    </div>
+    {%- if site.data.projects.size > 0 -%}
+      <div class="project-grid">
+        {%- for project in site.data.projects -%}
+        <a class="project reveal-item" href="{{ project.url }}" target="_blank" rel="noopener">
+          <h3 class="project__name">{{ project.name | escape }}</h3>
+          <p class="project__desc">{{ project.description | escape }}</p>
+          {%- if project.stack.size > 0 -%}
+            <div class="project__stack">
+              {%- for s in project.stack -%}
+              <span class="tag">{{ s }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <span class="card__more mono">view repo →</span>
+        </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </section>
+
+  <!-- ═══ 05 / dev.to ═══ -->
+  <section class="section" id="dev">
+    <div class="section__head reveal-item">
+      <span class="section__num mono">05</span>
       <h2 class="section__title">dev.to</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>
@@ -122,10 +149,10 @@ layout: default
     </div>
   </section>
 
-  <!-- ═══ 05 / contact ═══ -->
+  <!-- ═══ 06 / contact ═══ -->
   <section class="section" id="contact">
     <div class="section__head reveal-item">
-      <span class="section__num mono">05</span>
+      <span class="section__num mono">06</span>
       <h2 class="section__title">say hello</h2>
       <span class="section__rule" aria-hidden="true"></span>
     </div>

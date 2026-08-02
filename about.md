@@ -14,21 +14,26 @@ permalink: /about/
 
 ## Hello, I'm Elias Song
 
-I'm a developer working with **C++** and **Python**, and I'm a firm believer in
-open source — not just as a license model, but as a way of thinking. I write
-code, I break it, I learn from it, and then I write down what I learned so it
-doesn't vanish the moment I move on to the next problem.
+I'm a college student studying **Network Engineering**. I like open source,
+writing, and games — the same energy I bring to code.
 
-This site is my own corner of the internet: a place to share projects, publish
-blog posts, and keep a public record of my growth as a developer.
+Learning is how I spend most of my free time. Right now I'm digging deep into
+**C++**, and I have a small C++ game in the works. Along the way I keep a
+public log of everything I pick up, so it never just evaporates.
 
-## What I work with
+### What I'm working on
 
-- **C++** — performance-sensitive code and anything that needs to be fast
-- **Python** — scripting, automation, tooling, and prototyping
-- **Open source** — contributing, collaborating, and shipping things in public
+- **C++ learning log** — a running record of my C++ journey:
+  [`Linux-system-lab`](https://github.com/elysianx138/Linux-system-lab.git)
+- **A C++ game** — small project I'm building for fun and to sharpen my skills
 
-## Where to find me
+### What I like
+
+- **Open source** — reading others' code, contributing, building in public
+- **Blogging** — writing down what I learn so it sticks (and helps the next person)
+- **Gaming** — the pressure off, or the fuel for new ideas
+
+### Where to find me
 
 {% for social in site.data.social %}
 - **{{ social.name }}** — [{{ social.handle }}]({{ social.url }})

@@ -211,6 +211,23 @@ body {
 .card--skeleton { color: var(--text-mute); font-size: .85rem; animation: pulse 1.6s ease-in-out infinite; }
 @keyframes pulse { 0%,100% { opacity:.35; } 50% { opacity:1; } }
 
+/* ─────────── Projects ─────────── */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 16px; margin-top: 24px; }
+.project {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 24px; background: var(--bg-inner);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  color: var(--text); position: relative; overflow: hidden;
+  transition: border-color .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
+}
+.project::before { content: ''; position: absolute; top:0; left:0; right:0; height:2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+.project:hover { border-color: var(--line-strong); transform: translateY(-4px); background: var(--bg); color: var(--text); }
+.project:hover::before { transform: scaleX(1); }
+.project__name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--text); }
+.project__name::before { content: '❯ '; color: var(--accent); font-family: var(--font-mono); }
+.project__desc { color: var(--text-mute); font-size: .88rem; line-height: 1.7; }
+.project__stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+
 /* ─────────── Social grid ─────────── */
 .social-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 12px; }
 .social-card {

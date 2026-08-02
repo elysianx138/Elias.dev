@@ -1,8 +1,7 @@
-# Projects are hidden until you have something to show.
-# Add entries like this to reveal them on the homepage:
-#
-# - name: My Project
-#   description: Short, punchy one-liner about what it does.
-#   stack: [C++, Python]
-#   url: "https://github.com/elysianx138/my-project"
-#   demo: "https://my-project.example.com"
+# Projects shown on the homepage, in order.
+
+- name: Linux System Lab
+  description: A public log of my C++ learning journey — notes and small experiments as I go deeper into the language.
+  stack: [C++]
+  url: "https://github.com/elysianx138/Linux-system-lab"
+  demo: ""

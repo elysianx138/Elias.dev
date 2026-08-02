@@ -70,11 +70,9 @@
     var el = document.getElementById('typewriter');
     if (!el) return;
     var phrases = [
-      '[ C++ / Python / Open Source ]',
-      '> who writes code in public',
-      '> who learns by breaking things gently',
-      '> who turns half-formed ideas into running code',
-      '> sophomore, developer, tinkerer'
+      '> technology exists to serve people, not the other way around',
+      '> coffee + code are the perfect pairing',
+      '> sophomore · network engineering · gamer'
     ];
     if (reduce()) {
       el.textContent = phrases[0];
