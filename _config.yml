@@ -1,13 +1,13 @@
 # ──────────────────────────────────────────────
 #  Site settings
 # ──────────────────────────────────────────────
-title: Elias's Blog
-subtitle: Code, Thoughts & Life
+title: Elias Song
+subtitle: C++ · Python · Open Source
 description: >-
-  A personal blog about programming, technology, and life.
-author: elysianx138
+  Personal site and blog of Elias Song, a developer working with C++ and Python
+  who loves open source. Sharing what I build and what I learn.
+author: Elias Song
 email: elysianx138@gmail.com
-avatar: /assets/images/avatar.jpg
 
 # ──────────────────────────────────────────────
 #  URL settings
@@ -16,9 +16,11 @@ url: "https://elysianx138.github.io"
 baseurl: "/Elias.dev"
 
 # ──────────────────────────────────────────────
-#  Social links
+#  Blog / community accounts
 # ──────────────────────────────────────────────
-github_username:  elysianx138
+devto_username:    elysianx138
+coderlegion_user:  elysianx
+coderlegion_url:   "https://coderlegion.com/user/elysianx"
 rss:              true
 
 # ──────────────────────────────────────────────

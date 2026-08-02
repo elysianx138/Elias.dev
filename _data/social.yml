@@ -1,0 +1,43 @@
+# Central social links for Elias Song
+# order controls display order on the site
+
+- name: GitHub
+  handle: elysianx138
+  url: "https://github.com/elysianx138"
+  icon: github
+  primary: true
+
+- name: X (Twitter)
+  handle: "@Johnchenm0wn"
+  url: "https://x.com/Johnchenm0wn"
+  icon: x
+
+- name: Instagram
+  handle: elysianx138
+  url: "https://instagram.com/elysianx138"
+  icon: instagram
+
+- name: LinkedIn
+  handle: "翔·宋"
+  url: "https://www.linkedin.com/in/%E7%BF%94-%E5%AE%8B-237a0a41b/"
+  icon: linkedin
+
+- name: YouTube
+  handle: "@Elysianx_138"
+  url: "https://youtube.com/@Elysianx_138"
+  icon: youtube
+
+- name: dev.to
+  handle: elysianx138
+  url: "https://dev.to/elysianx138"
+  icon: devto
+
+- name: CoderLegion
+  handle: elysianx
+  url: "https://coderlegion.com/user/elysianx"
+  icon: coderlegion
+
+- name: Email
+  handle: elysianx138@gmail.com
+  url: "mailto:elysianx138@gmail.com"
+  icon: email

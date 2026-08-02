@@ -3,51 +3,88 @@ layout: default
 ---
 
 <div class="home">
-  {%- if page.title -%}
-    <h1 class="home-heading">
-      {{ site.title }}<br>
-      <em>— {{ site.subtitle }}</em>
+
+  <section class="hero">
+    <div class="hero-eyebrow mono">~/welcome</div>
+    <h1 class="hero-title">
+      <span class="hero-title--line">{{ site.title | escape }}</span>
+      <span class="hero-title--accent mono">$ whoami</span>
     </h1>
-  {%- endif -%}
-
-  {{ content }}
-
-  {%- if site.posts.size > 0 -%}
-    <ul class="post-list">
-      {%- for post in paginator.posts -%}
-      <li class="post-item">
-        <span class="post-meta">
-          {{ post.date | date: "%b %d, %Y" }}
-          {%- if post.categories -%}
-            &nbsp;•
-            {% for cat in post.categories %}
-              <a href="/categories/#{{ cat | slugify }}" class="post-category">{{ cat }}</a>
-              {%- unless forloop.last -%}, {% endunless %}
-            {%- endfor -%}
-          {%- endif -%}
-        </span>
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h2>
-        {%- if site.show_excerpts -%}
-          <div class="post-excerpt">
-            {{ post.excerpt }}
-          </div>
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-
-    <!-- Pagination -->
-    <div class="pagination">
-      {%- if paginator.previous_page -%}
-        <a href="{{ paginator.previous_page_path | relative_url }}" class="prev">← Previous</a>
-      {%- endif -%}
-      {%- if paginator.next_page -%}
-        <a href="{{ paginator.next_page_path | relative_url }}" class="next">Next →</a>
-      {%- endif -%}
+    <p class="hero-subline">{{ site.subtitle | escape }}</p>
+    <p class="hero-blurb">
+      Developer building with <strong>C++</strong> and <strong>Python</strong>.
+      Open-source enthusiast who believes in writing down what he learns and
+      sharing what he builds.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn--primary" href="#blog">Read the blog</a>
+      <a class="btn btn--ghost" href="{{ "/about" | relative_url }}">About me</a>
     </div>
-  {%- endif -%}
+  </section>
+
+  <section class="social-section" id="social">
+    <h2 class="section-title mono">
+      <span class="section-title__num">01</span> / find me online
+    </h2>
+    <div class="social-grid">
+      {%- for social in site.data.social -%}
+      <a class="social-card" href="{{ social.url }}" target="_blank" rel="noopener">
+        <span class="social-card__icon" data-icon="{{ social.icon }}"></span>
+        <span class="social-card__body">
+          <span class="social-card__name">{{ social.name | escape }}</span>
+          <span class="social-card__handle mono">{{ social.handle | escape }}</span>
+        </span>
+        <span class="social-card__arrow" aria-hidden="true">↗</span>
+      </a>
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <section class="blog-section" id="blog">
+    <h2 class="section-title mono">
+      <span class="section-title__num">02</span> / blog
+    </h2>
+
+    {%- if site.posts.size > 0 -%}
+      <div class="post-list">
+        {%- for post in site.posts limit:6 -%}
+        <a class="post-item" href="{{ post.url | relative_url }}">
+          <div class="post-item__meta mono">
+            <span>{{ post.date | date: "%b %d, %Y" }}</span>
+            {%- for cat in post.categories -%}
+              <span>·</span><span class="post-category">{{ cat }}</span>
+            {%- endfor -%}
+          </div>
+          <h3 class="post-item__title">{{ post.title | escape }}</h3>
+          {%- if post.excerpt -%}
+            <p class="post-item__desc">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+          {%- endif -%}
+        </a>
+        {%- endfor -%}
+      </div>
+      {%- if site.posts.size > 6 -%}
+      <div class="blog-more">
+        <a class="mono" href="{{ "/archive" | relative_url }}">see archive →</a>
+      </div>
+      {%- endif -%}
+    {%- else -%}
+      <p class="section-note">No local posts yet. First article coming soon.</p>
+    {%- endif -%}
+  </section>
+
+  <section class="blog-section" id="devto">
+    <h2 class="section-title mono">
+      <span class="section-title__num">03</span> / external — dev.to
+    </h2>
+    <p class="section-note">
+      Articles I publish on
+      <a href="https://dev.to/{{ site.devto_username }}" target="_blank" rel="noopener">dev.to</a>
+      (synced automatically) and on
+      <a href="{{ site.coderlegion_url }}" target="_blank" rel="noopener">CoderLegion</a>.
+    </p>
+    <div id="devto-feed" class="post-list" data-empty="No posts yet — check back soon.">
+      <div class="post-item post-item--skeleton is-loading">Loading posts…</div>
+    </div>
+  </section>
+
 </div>

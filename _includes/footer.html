@@ -1,8 +1,16 @@
 <footer class="site-footer">
   <div class="wrapper">
     <div class="footer-content">
-      <p>&copy; {{ site.time | date: "%Y" }} {{ site.author | escape }}. All rights reserved.</p>
-      <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+      <div class="footer-socials">
+        {%- for social in site.data.social -%}
+          <a href="{{ social.url }}" target="_blank" rel="noopener" class="footer-social mono"
+             data-icon="{{ social.icon }}" aria-label="{{ social.name | escape }}">
+            {{ social.name | escape }}
+          </a>
+        {%- endfor -%}
+        <a href="{{ "/feed.xml" | relative_url }}" class="footer-social mono" aria-label="RSS">RSS</a>
+      </div>
+      <p class="footer-note">&copy; {{ site.time | date: "%Y" }} {{ site.author | escape }}. Built with Jekyll · Crafted by hand.</p>
     </div>
   </div>
 </footer>

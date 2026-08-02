@@ -5,43 +5,42 @@ layout: default
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta-single">
+    <p class="post-meta-single mono">
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: "%B %d, %Y" }}
+        {{ page.date | date: "%b %d, %Y" }}
       </time>
       {%- if page.author -%}
-        &nbsp;—&nbsp;<span itemprop="author">{{ page.author }}</span>
-      {%- endif -%}
-      {%- if page.categories -%}
-        <br>
-        {% for cat in page.categories %}
-          <a href="/categories/#{{ cat | slugify }}" class="post-category">{{ cat }}</a>
-          {%- unless forloop.last -%} {% endunless %}
-        {%- endfor -%}
+        &nbsp;·&nbsp;<span itemprop="author">{{ page.author }}</span>
       {%- endif -%}
     </p>
+    {%- if page.categories -%}
+      <div class="post-tags mono">
+        {% for cat in page.categories %}
+          <a href="/categories/#{{ cat | slugify }}" class="post-category">{{ cat }}</a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </header>
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
   </div>
 
-  <div class="ornament">✦ ✦ ✦</div>
-
   {%- if page.toc -%}
   <nav class="post-toc">
-    <h3>Contents</h3>
+    <h3 class="mono">// contents</h3>
     {% include toc.html html=content %}
   </nav>
   {%- endif -%}
 
-  <!-- Post navigation -->
+  <div class="ornament">✦✦✦</div>
+
   <div class="post-nav">
     {%- if page.previous -%}
-      <a class="prev" href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>
+      <a class="post-nav__link prev" href="{{ page.previous.url | relative_url }}"><span class="mono">← prev</span> {{ page.previous.title }}</a>
     {%- endif -%}
     {%- if page.next -%}
-      <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>
+      <a class="post-nav__link next" href="{{ page.next.url | relative_url }}"><span class="mono">next →</span> {{ page.next.title }}</a>
     {%- endif -%}
   </div>
 </article>

@@ -1,23 +1,22 @@
 <header class="site-header">
   <div class="wrapper">
-    <a class="site-title" href="{{ "/" | relative_url }}">
-      {{ site.title | escape }}
+    <a class="site-logo mono" href="{{ "/" | relative_url }}">
+      <span class="site-logo__prompt">➜</span>
+      <span class="site-logo__name">~/elias</span>
     </a>
 
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Primary">
       <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-      <label for="nav-trigger" class="nav-toggle">
-        <span class="menu-icon">☰</span>
+      <label for="nav-trigger" class="nav-toggle" aria-label="Toggle menu">
+        <span class="menu-icon">≡</span>
       </label>
 
       <div class="nav-links">
-        <a href="{{ "/" | relative_url }}">Home</a>
-        <a href="{{ "/about" | relative_url }}">About</a>
-        <a href="{{ "/archive" | relative_url }}">Archive</a>
-        <a href="{{ "/categories" | relative_url }}">Categories</a>
-        {%- if site.github_username -%}
-        <a href="https://github.com/{{ site.github_username }}" target="_blank">GitHub</a>
-        {%- endif -%}
+        <a href="{{ "/" | relative_url }}" class="nav-link">Home</a>
+        <a href="{{ "/about" | relative_url }}" class="nav-link">About</a>
+        <a href="{{ "/archive" | relative_url }}" class="nav-link">Archive</a>
+        <a href="{{ "/categories" | relative_url }}" class="nav-link">Categories</a>
+        <a href="https://github.com/{{ site.github_username | default: 'elysianx138' }}" target="_blank" rel="noopener" class="nav-link nav-link--ext">GitHub ↗</a>
       </div>
     </nav>
   </div>

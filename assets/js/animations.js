@@ -1,41 +1,29 @@
 /**
- * Elias's Blog — Animations
- * Smooth page transitions & scroll-triggered reveals
+ * Elias Song — Animations
+ * Smooth page transitions, scroll-triggered reveals, sticky header state.
  */
 
 (function () {
   'use strict';
 
-  /* ─────────── 1. View Transitions for internal links ─────────── */
+  /* ─────────── 1. View Transitions / fallback fade ─────────── */
   function initViewTransitions() {
-    // Support View Transitions API natively if available
-    if (!document.startViewTransition) {
-      // Fallback: manual fade for browsers without VT API
-      document.addEventListener('click', function (e) {
-        var link = e.target.closest('a[href]');
-        if (!link) return;
-        if (link.hasAttribute('target')) return;
-        if (link.getAttribute('href').startsWith('#')) return;
+    if (document.startViewTransition) return; // native handled via CSS
 
-        var url = link.href;
-        var origin = location.origin;
-        if (!url.startsWith(origin)) return;
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href]');
+      if (!link) return;
+      if (link.hasAttribute('target')) return;
+      var href = link.getAttribute('href') || '';
+      if (href.startsWith('#')) return;
+      if (!link.href.startsWith(location.origin)) return;
+      if (link.hasAttribute('download')) return;
 
-        // Skip downloads, same-page anchors
-        if (link.hasAttribute('download')) return;
-        if (link.getAttribute('href').startsWith('#')) return;
-
-        e.preventDefault();
-
-        // Fade out overlay
-        var overlay = document.querySelector('.page-transition-overlay') || createOverlay();
-        overlay.style.opacity = '1';
-
-        setTimeout(function () {
-          window.location.href = url;
-        }, 350);
-      });
-    }
+      e.preventDefault();
+      var overlay = document.querySelector('.page-transition-overlay') || createOverlay();
+      overlay.style.opacity = '1';
+      setTimeout(function () { window.location.href = link.href; }, 300);
+    });
   }
 
   function createOverlay() {
@@ -43,55 +31,64 @@
     div.className = 'page-transition-overlay';
     div.style.cssText =
       'position:fixed;top:0;left:0;width:100%;height:100%;' +
-      'background:#F7F4F0;z-index:10000;' +
+      'background:#06070a;z-index:10000;' +
       'opacity:0;transition:opacity 0.3s ease;' +
       'pointer-events:none;';
     document.body.appendChild(div);
     return div;
   }
 
-  /* ─────────── 2. Scroll-triggered reveal animations ─────────── */
+  /* ─────────── 2. Scroll-triggered reveals ─────────── */
   function initScrollReveals() {
     var revealElements = document.querySelectorAll(
-      '.post-item, .home-heading, .page-title, .post-header, .page-header, .post-toc, .post-nav'
+      '.post-item, .hero, .section-title, .page-title, .post-header, .page-header, .post-toc, .post-nav, .social-card'
     );
 
     if (revealElements.length === 0) return;
 
-    // Add .reveal class
-    for (var i = 0; i < revealElements.length; i++) {
-      revealElements[i].classList.add('reveal');
-    }
+    revealElements.forEach(function (el) { el.classList.add('reveal'); });
 
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(
         function (entries) {
-          for (var j = 0; j < entries.length; j++) {
-            if (entries[j].isIntersecting) {
-              entries[j].target.classList.add('revealed');
-              observer.unobserve(entries[j].target);
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
             }
-          }
+          });
         },
         { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
       );
-
-      for (var k = 0; k < revealElements.length; k++) {
-        observer.observe(revealElements[k]);
-      }
+      revealElements.forEach(function (el) { observer.observe(el); });
     } else {
-      // Fallback: reveal all immediately
-      for (var m = 0; m < revealElements.length; m++) {
-        revealElements[m].classList.add('revealed');
-      }
+      revealElements.forEach(function (el) { el.classList.add('revealed'); });
     }
   }
 
-  /* ─────────── 3. Reveal on new page load after transition ─────────── */
-  // Re-init after View Transition completes
+  /* ─────────── 3. Sticky header shadow on scroll ─────────── */
+  function initHeaderState() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var onScroll = function () {
+      header.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ─────────── 4. Boot ─────────── */
   function onReady() {
     initScrollReveals();
     initViewTransitions();
+    initHeaderState();
+
+    // Re-run reveals after dev.to feed renders new nodes
+    var feed = document.getElementById('devto-feed');
+    if (feed) {
+      var mo = new MutationObserver(function () { initScrollReveals(); });
+      mo.observe(feed, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === 'loading') {
@@ -100,9 +97,7 @@
     onReady();
   }
 
-  // Also run on PJAX/history navigations
   window.addEventListener('popstate', function () {
     setTimeout(initScrollReveals, 100);
   });
-
 })();
