@@ -3,7 +3,8 @@
   {%- include head.html -%}
   <body>
     <div class="paper-texture" aria-hidden="true"></div>
-    {%- include header.html -%}
+    <div class="scroll-progress" aria-hidden="true"></div>
+    {% include header.html %}
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
@@ -11,9 +12,10 @@
       </div>
     </main>
 
-    {%- include footer.html -%}
+    {% include footer.html %}
 
     <script src="{{ "/assets/js/animations.js" | relative_url }}"></script>
     <script src="{{ "/assets/js/devto.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/smooth.js" | relative_url }}"></script>
   </body>
 </html>
