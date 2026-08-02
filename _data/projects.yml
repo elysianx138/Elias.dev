@@ -6,9 +6,15 @@
   url: "https://github.com/elysianx138/Linux-system-lab"
   demo: ""
 
+- name: InkAI
+  description: Full-stack blog backend — FastAPI + MySQL + Redis with cache-layer protection and Docker deploy.
+  stack: [FastAPI, MySQL, Redis, Docker]
+  url: "https://github.com/elysianx138/InkAI"
+  demo: ""
+
 - name: how-claude-code-built
-  description: A growing collection of Claude code snippets — a working reference for research, learning, and building with AI agents.
-  stack: [AI, Python]
+  description: A growing collection of Claude code snippets — a working reference for research, learning, and AI agents.
+  stack: [Claude, AI Agents, Python]
   url: "https://github.com/elysianx138/how-claude-code-built"
   demo: ""
 

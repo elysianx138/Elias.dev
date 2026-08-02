@@ -21,11 +21,14 @@
   function progress(el) {
     var r = el.getBoundingClientRect();
     var vh = window.innerHeight;
-    var start = vh * 0.95;      // element fully below this line → 0
-    var end = vh * 0.6;         // element crossing this line → 1
+    var start = vh * 1.05;      // element fully below this line → 0
+    var end = vh * 0.55;        // element crossing this line → 1
     var p = (start - r.top) / (start - end);
     return Math.max(0, Math.min(1, p));
   }
+
+  /* ease-out cubic for a silkier, less rigid feel */
+  function easeOut(p) { return 1 - Math.pow(1 - p, 3); }
 
   function apply() {
     ticking = false;
@@ -33,9 +36,9 @@
     var reduceMotion = reduce();
     for (i = 0; i < items.length; i++) {
       el = items[i];
-      p = reduceMotion ? 1 : progress(el);
+      p = reduceMotion ? 1 : easeOut(progress(el));
       el.style.opacity = String(p);
-      el.style.transform = 'translateY(' + ((1 - p) * 34) + 'px)';
+      el.style.transform = 'translateY(' + ((1 - p) * 42) + 'px)';
     }
   }
 
@@ -72,7 +75,7 @@
     var phrases = [
       '> technology exists to serve people, not the other way around',
       '> coffee + code are the perfect pairing',
-      '> CS student · backend · AI · open source'
+      '> Python · FastAPI · C++ · AI'
     ];
     if (reduce()) {
       el.textContent = phrases[0];
@@ -115,9 +118,9 @@
     if (!hero || reduce()) return;
     function onScroll() {
       var s = window.scrollY;
-      var p = Math.min(s / (hero.offsetHeight * 0.7), 1);
+      var p = easeOut(Math.min(s / (hero.offsetHeight * 0.7), 1));
       if (inner) {
-        inner.style.transform = 'translateY(' + (p * -50) + 'px)';
+        inner.style.transform = 'translateY(' + (p * -60) + 'px)';
         inner.style.opacity = String(1 - p * 1.1);
       }
       if (cue) cue.style.opacity = String(Math.max(0, 1 - p * 2));
