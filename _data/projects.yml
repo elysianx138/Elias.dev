@@ -1,7 +1,37 @@
 # Projects shown on the homepage, in order.
 
 - name: Linux System Lab
-  description: A public log of my C++ learning journey — notes and small experiments as I go deeper into the language.
-  stack: [C++]
+  description: Linux & C++ learning journey — from WSL basics to system programming.
+  stack: [C++, Linux]
   url: "https://github.com/elysianx138/Linux-system-lab"
+  demo: ""
+
+- name: how-claude-code-built
+  description: A growing collection of Claude code snippets — a working reference for research, learning, and building with AI agents.
+  stack: [AI, Python]
+  url: "https://github.com/elysianx138/how-claude-code-built"
+  demo: ""
+
+- name: Chat_Agent
+  description: First project after learning LangChain — a practical starter for building agents with LLMs.
+  stack: [Python, LangChain]
+  url: "https://github.com/elysianx138/Chat_Agent"
+  demo: ""
+
+- name: InkAI
+  description: AI-powered writing platform with semantic search, RAG Q&A, and intelligent recommendations.
+  stack: [Python, FastAPI, RAG]
+  url: "https://github.com/elysianx138/InkAI"
+  demo: ""
+
+- name: firstblog.github.io
+  description: A Flask full-stack blog — a solid starting point for green hands learning full-stack development.
+  stack: [Python, Flask]
+  url: "https://github.com/elysianx138/firstblog.github.io"
+  demo: ""
+
+- name: North-star-of-CS
+  description: A curated knowledge base of computer science, friendly to students in any CS program.
+  stack: [CS, Notes]
+  url: "https://github.com/elysianx138/North-star-of-CS"
   demo: ""

@@ -72,7 +72,7 @@
     var phrases = [
       '> technology exists to serve people, not the other way around',
       '> coffee + code are the perfect pairing',
-      '> sophomore · network engineering · gamer'
+      '> CS student · backend · AI · open source'
     ];
     if (reduce()) {
       el.textContent = phrases[0];
