@@ -43,7 +43,7 @@
 
     var frag = document.createDocumentFragment();
     posts.forEach(function (post) {
-      var card = el('a', 'card');
+      var card = el('a', 'card reveal-item');
       card.href = post.url;
       card.target = '_blank';
       card.rel = 'noopener';

@@ -125,7 +125,7 @@ img { max-width: 100%; height: auto; }
 .btn--ghost { border-color: var(--line-strong); color: var(--ink); background: transparent; }
 .btn--ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-/* ─────────── Hero — full-screen dark, pinned ─────────── */
+/* ─────────── Hero — full-screen dark, full-bleed ═────────── */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -135,8 +135,13 @@ img { max-width: 100%; height: auto; }
   color: var(--paper);
   border-bottom: 1px solid #33392f;
   overflow: hidden;
+  /* Break out of the .wrapper max-width for a true full-bleed band */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: max(28px, calc(50vw - var(--max-w) / 2));
+  padding-right: max(28px, calc(50vw - var(--max-w) / 2));
 }
-.hero__inner { max-width: 720px; padding: 40px 0; }
+.hero__inner { max-width: 720px; }
 .hero__eyebrow { color: #a9c39a; font-size: .85rem; letter-spacing: .3px; margin-bottom: 18px; text-transform: uppercase; }
 .hero__title {
   font-family: var(--font-display);
@@ -166,20 +171,6 @@ img { max-width: 100%; height: auto; }
 
 /* ─────────── Sections ─────────── */
 .section { padding: 56px 0 12px; scroll-margin-top: calc(var(--header-h) + 20px); }
-
-/* Full-bleed scroll-driven panels (break out of the .wrapper max-width) */
-.hero, .pin {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding-left: max(28px, calc((100vw - var(--max-w)) / 2 + 28px));
-  padding-right: max(28px, calc((100vw - var(--max-w)) / 2 + 28px));
-}
-
-/* Pinned scroll-driven sections (full-viewport while unlocked) */
-.pin { display: flex; align-items: center; min-height: 100vh; padding-top: 80px; padding-bottom: 80px; }
-.pin__inner { width: 100%; }
-/* During GSAP pin the .pin stays fixed; we constrain inner width */
 .section__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 30px; }
 .section__num { color: var(--gold); font-size: .85rem; letter-spacing: .1em; }
 .section__title { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; color: var(--ink); letter-spacing: -.5px; }
@@ -399,17 +390,23 @@ img { max-width: 100%; height: auto; }
 
 /* ─────────── Animations ─────────── */
 @keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
-@keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
 
-/* Reduced-motion: GSAP bails, so ensure nothing stays hidden */
-@media (prefers-reduced-motion: reduce) {
-  .hero [data-anim], .card, .social-card, .section__title, .section__num, .section__rule {
-    opacity: 1 !important;
-    transform: none !important;
-  }
+/* Scroll-driven reveal items */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
 }
+.reveal-item.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-item--d1 { transition-delay: .1s; }
+.reveal-item--d2 { transition-delay: .18s; }
+.reveal-item--d3 { transition-delay: .26s; }
 
-/* Smooth anchor scroll handled natively via scroll-behavior:smooth + scroll-margin */
+/* Reduced-motion: everything visible, no movement */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-item { opacity: 1 !important; transform: none !important; transition: none; }
+}
 
 /* ─────────── Responsive ─────────── */
 @media (max-width: 768px) {
@@ -427,9 +424,7 @@ img { max-width: 100%; height: auto; }
   .site-nav__link:last-child { border-bottom: none; }
   .site-nav__link::after { display: none; }
 
-  .hero, .pin { padding-left: 18px; padding-right: 18px; }
-  .hero { padding-top: 56px; padding-bottom: 80px; }
-  .pin { padding-top: 48px; padding-bottom: 48px; }
+  .hero { padding-left: 18px; padding-right: 18px; padding-top: 56px; padding-bottom: 80px; }
   .card-grid { grid-template-columns: 1fr; }
   .social-grid { grid-template-columns: 1fr 1fr; }
   .stack-cols { grid-template-columns: 1fr; }
